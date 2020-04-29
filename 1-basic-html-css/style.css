@@ -1,0 +1,44 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Raleway', sans-serif;
+}
+
+h2 {
+  color: #009bac;
+}
+
+p {
+  text-transform: uppercase;
+  color: purple;
+}
+
+#about {
+  border: solid 2px blue;
+  color: red;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 50px;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.with-border {
+  border: dotted 10px pink;
+}
+
+#nav-links {
+  color: blue
+}
+
+div#nav-links a {
+  color: red;
+}
+
+#nav-links a {
+  color: green;
+}

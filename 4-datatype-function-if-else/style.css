@@ -1,0 +1,12 @@
+#box {
+  height: 100px;
+  width: 100px;
+  background: red;
+  position: fixed;
+  right: 10px;
+  top: 10px;
+}
+
+#box:hover {
+  background: green;
+}

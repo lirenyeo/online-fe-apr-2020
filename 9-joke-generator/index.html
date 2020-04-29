@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+  <title>Learn API</title>
+</head>
+
+<body>
+  <h1 id="joke-container"></h1>
+  <button id="btn">Click to Get Joke</button>
+  <hr>
+  <div id="user-container"></div>
+
+
+  <script>
+    function getJokeFromAPI() {
+      $.ajax({
+        url: 'https://api.chucknorris.io/jokes/random',
+        success: function(data) {
+          console.log(data.value)
+          $('#joke-container').html(data.value)
+          $('#btn').prop('disabled', false)
+        },
+        error: function(error) {
+          alert('Something went wrong. Try again later!')
+        },
+        beforeSend: function() {
+          $('#btn').prop('disabled', true)
+          $('#joke-container').html('Loading...')
+        }
+      })
+    }
+
+    function getUser(id) {
+      $.ajax({
+        url: `https://reqres.in/api/users/${id}`,
+        success: function(response) {
+          console.log(response.data)
+          const user = response.data
+          $('#user-container').html(`
+            <img src=${user.avatar} />
+            <h2>${user.first_name} ${user.last_name}</h2>
+            <h3>${user.email}</h2>
+          `)
+        }
+      })
+    }
+
+    $('#btn').on('click', () => {
+      getJokeFromAPI()
+    })
+
+    getUser(3)
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+  <title>Gif Generator</title>
+  <style>
+    #gif-container {
+      width: 100%;
+      height: 30vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      font-size: 25px;
+      padding: 10px 20px;
+      background: white;
+      border: solid 2px lightcoral;
+      cursor: pointer;
+    }
+
+    button:hover {
+      color: white;
+      background:lightcoral;
+      animation: shake 500ms infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(3px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(3px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(1px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">Click to Get Gif</button>
+  <input type="text" id="text-input">
+  <div id="gif-container"></div>
+
+  <script>
+    function getGif(tag) {
+      $.ajax({
+        url: `http://api.giphy.com/v1/gifs/random?api_key=rptm3pQaqRJTUQeWxVYU9wgWwwt804vd&tag=${tag}`,
+        beforeSend: function() {
+          $('#gif-container').html(`
+            <img height="200" src="https://i.pinimg.com/originals/78/e8/26/78e826ca1b9351214dfdd5e47f7e2024.gif" />
+          `)
+        },
+        success: function(response) {
+          console.log(response.data.image_url)
+          $('#gif-container').html(`
+            <img src=${response.data.image_url} />
+          `)
+        }
+      })
+    }
+
+    $('#btn').on('click', () => {
+      const tagInput = $('#text-input').val()
+      getGif(tagInput)
+    })
+  </script>
+</body>
+
+</html>

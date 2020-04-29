@@ -1,0 +1,30 @@
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+#sidebar {
+  box-sizing: border-box;
+  width: 300px;
+  background: lightgray;
+  border: solid 1px tomato;
+  transition: width 500ms;
+}
+
+#sidebar.hidden {
+  width: 0;
+}
+
+#content {
+  box-sizing: border-box;
+  flex: 1;
+}
+
+#side-toggle {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: tomato;
+  color: white;
+  z-index: 99;
+}

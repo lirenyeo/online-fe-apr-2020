@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Simple Todo</title>
+</head>
+<body>
+  <form id="todo-form">
+    <input id="task-input" placeholder="Write a todo task" type="text">
+    <input disabled id="add-btn" type="submit" value="Add Task">
+  </form>
+  <ol id="task-list">
+    <li>Walk the dog.</li>
+    <li>Buy milk</li>
+  </ol>
+
+  <script>
+    const todoForm = document.getElementById('todo-form') // html node
+    const taskInput = document.getElementById('task-input')
+    const taskList = document.getElementById('task-list')
+    const addBtn = document.getElementById('add-btn')
+
+    todoForm.addEventListener('submit', (event) => {
+      event.preventDefault() // prevent default browser behavior
+      const inputValue = taskInput.value // input string
+      const newList = document.createElement('li') // --> <li></li>
+      newList.innerText = inputValue
+
+      taskList.appendChild(newList)
+
+      // clear existing input text
+      taskInput.value = ''
+      taskInput.focus()
+      addBtn.disabled = true
+    })
+
+    taskList.addEventListener('click', event => {
+      event.target.remove()
+    })
+
+    taskInput.addEventListener('input', () => {
+      if (taskInput.value.length < 4) {
+        addBtn.disabled = true
+      } else {
+        addBtn.disabled = false
+      }
+    })
+  </script>
+</body>
+</html>
